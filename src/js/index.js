@@ -68,7 +68,7 @@ const songs = [
         title: "Internumize", 
         author: "Fakito", 
         description: "#Electro", 
-        image: "./src/img/internumize.png", 
+        image: "./src/img/Internumize.png", 
         audio: "./src/audio/internumize.mp3", 
         color: "#535353" 
     },
