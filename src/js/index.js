@@ -1,20 +1,20 @@
 // Lista de canciones
 const songs = [
     { 
-        title: "Cognose", 
-        author: "Fakito", 
-        description: "#Electro", 
-        image: "./src/img/cognosce.png", 
-        audio: "./src/audio/cognosce.mp3", 
-        color: "#58276a" 
-    },
-    { 
         title: "Bla Bla", 
         author: "Fakito", 
         description: "#Electro", 
         image: "./src/img/bla.png", 
         audio: "./src/audio/bla.mp3", 
         color: "#878286" 
+    },
+    { 
+        title: "Cognose", 
+        author: "Fakito", 
+        description: "#Electro", 
+        image: "./src/img/cognosce.png", 
+        audio: "./src/audio/cognosce.mp3", 
+        color: "#58276a" 
     },
     { 
         title: "Inter Infinitum", 
@@ -57,6 +57,14 @@ const songs = [
         color: "#937d1b" 
     },
     { 
+        title: "Ignis", 
+        author: "Fakito", 
+        description: "#Electro", 
+        image: "./src/img/ignis.png", 
+        audio: "./src/audio/ignis.mp3", 
+        color: "#484848" 
+    },
+    { 
         title: "Amissa morale", 
         author: "Fakito", 
         description: "#Electro", 
@@ -87,14 +95,6 @@ const songs = [
         image: "./src/img/extraneus.jpeg", 
         audio: "./src/audio/extraneus.mp3", 
         color: "#1e1227" 
-    },
-    { 
-        title: "Ignis", 
-        author: "Fakito", 
-        description: "#Electro", 
-        image: "./src/img/ignis.png", 
-        audio: "./src/audio/ignis.mp3", 
-        color: "#484848" 
     },
     { 
         title: "Cold", 
@@ -136,52 +136,57 @@ const forwardBtn = document.getElementById("forward-btn");
 const volumeSlider = document.getElementById("volume-slider");
 const backgroundPanel = document.querySelector(".background-panel");
 
-// Configuración de la Web Audio API
-const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-let analyser, source;
+let audioContext;
+let analyser;
+let source;
+let bufferLength;
+let dataArray;
 
-function handleUserInteraction() {
-    if (audioContext.state === "suspended") {
-        audioContext.resume().then(() => {
-            console.log("AudioContext activado");
-        });
+// Configuración del control de volumen
+volumeSlider.addEventListener("input", function () {
+    const percentage = (this.value - this.min) / (this.max - this.min) * 100;
+    this.style.background = `linear-gradient(to right, var(--song-color, #4caf50) ${percentage}%, rgba(0, 0, 0, 0.5) ${percentage}%)`;
+    audioPlayer.volume = volumeSlider.value;
+});
+
+function initializeAudioContext() {
+    if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
     }
 }
 
 function setupAudioAnalysis() {
-    // Crea un nodo fuente para el audio
-    source = audioContext.createMediaElementSource(audioPlayer);
+    if (!audioContext) initializeAudioContext();
+    if (source) return;
 
-    // Crea un nodo analizador
+    source = audioContext.createMediaElementSource(audioPlayer);
     analyser = audioContext.createAnalyser();
     analyser.fftSize = 256;
-    const bufferLength = analyser.frequencyBinCount;
-    const dataArray = new Uint8Array(bufferLength);
+    bufferLength = analyser.frequencyBinCount;
+    dataArray = new Uint8Array(bufferLength);
 
-    // Conecta el nodo fuente al analizador y el analizador al destino
     source.connect(analyser);
     analyser.connect(audioContext.destination);
-
-    // Función para actualizar la opacidad del panel de fondo
-    function updateBackgroundOpacity() {
-        requestAnimationFrame(updateBackgroundOpacity);
-        analyser.getByteFrequencyData(dataArray);
-    
-        const average = dataArray.reduce((sum, value) => sum + value, 0) / bufferLength;
-    
-        // Hacer la opacidad más extrema (0.1 - 1.0 en lugar de 0.2 - 0.6)
-        const opacity = Math.max(0.1, Math.min(1.0, (average / 128))); 
-    
-        // Aplicar opacidad con una transición rápida
-        backgroundPanel.style.transition = "opacity 0.1s ease-in-out"; 
-        backgroundPanel.style.opacity = opacity.toFixed(1);
-    }
-    
 
     updateBackgroundOpacity();
 }
 
-// Función para cargar una canción
+function updateBackgroundOpacity() {
+    requestAnimationFrame(updateBackgroundOpacity);
+    if (!analyser) return;
+
+    analyser.getByteFrequencyData(dataArray);
+    const average = dataArray.reduce((sum, value) => sum + value, 0) / bufferLength;
+
+    // Ajustar la opacidad
+    const opacity = Math.max(0.1, Math.min(1.0, average / 128));
+    backgroundPanel.style.opacity = opacity.toFixed(1);
+
+    // Ajustar la escala de la imagen de fondo
+    const scale = 1 + (average / 256); // Escala entre 1 y 1.5 (puedes ajustar estos valores)
+    backgroundPanel.style.transform = `scale(${scale})`;
+}
+
 function loadSong(index) {
     const song = songs[index];
     audioPlayer.src = song.audio;
@@ -191,18 +196,28 @@ function loadSong(index) {
     songDescription.textContent = song.description;
     document.body.style.backgroundColor = song.color;
 
-    const buttons = document.querySelectorAll(".controls-panel button");
-    buttons.forEach(button => {
+    backgroundPanel.style.backgroundImage = `url(${song.image})`;
+    backgroundPanel.style.backgroundSize = "cover";
+    backgroundPanel.style.backgroundPosition = "center";
+    backgroundPanel.style.backgroundRepeat = "no-repeat";
+    backgroundPanel.style.width = "100vw";
+    backgroundPanel.style.height= "100vh";
+    backgroundPanel.style.filter = "blur(12px)";
+
+
+    document.querySelectorAll(".controls-panel button").forEach(button => {
         button.style.backgroundColor = song.color;
     });
+
+    volumeSlider.style.setProperty("--song-color", song.color);
+    volumeSlider.dispatchEvent(new Event("input"));
 }
 
 // Cargar la primera canción al iniciar
 loadSong(currentSongIndex);
 
-// Reproducir/Pausar
 playPauseBtn.addEventListener("click", async () => {
-    handleUserInteraction();
+    initializeAudioContext();
     if (audioPlayer.paused) {
         try {
             await audioPlayer.play();
@@ -217,36 +232,26 @@ playPauseBtn.addEventListener("click", async () => {
     }
 });
 
-
-// Cambiar a la siguiente canción
 nextBtn.addEventListener("click", () => {
     currentSongIndex = (currentSongIndex + 1) % songs.length;
     loadSong(currentSongIndex);
-    audioPlayer.currentTime = 0; // Reinicia el tiempo de reproducción
-    audioPlayer.pause(); // Pausa la canción
-    playPauseBtn.textContent = "▶"; // Actualiza el botón de Play/Pausa
+    audioPlayer.currentTime = 0;
+    audioPlayer.pause();
+    playPauseBtn.textContent = "▶";
 });
 
-// Cambiar a la canción anterior
 prevBtn.addEventListener("click", () => {
     currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
     loadSong(currentSongIndex);
-    audioPlayer.currentTime = 0; // Reinicia el tiempo de reproducción
-    audioPlayer.pause(); // Pausa la canción
-    playPauseBtn.textContent = "▶"; // Actualiza el botón de Play/Pausa
+    audioPlayer.currentTime = 0;
+    audioPlayer.pause();
+    playPauseBtn.textContent = "▶";
 });
 
-// Retroceder 5 segundos
 rewindBtn.addEventListener("click", () => {
     audioPlayer.currentTime -= 5;
 });
 
-// Avanzar 5 segundos
 forwardBtn.addEventListener("click", () => {
     audioPlayer.currentTime += 5;
-});
-
-// Control de volumen
-volumeSlider.addEventListener("input", () => {
-    audioPlayer.volume = volumeSlider.value;
 });

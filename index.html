@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fakito's Music (devBuild)</title>
-    <link rel="stylesheet" href="./src/css/index.css"></link>
+
     <link rel="stylesheet" href="./src/css/responsive.css"></link>
 </head>
 <body>
     <div class="background-panel"></div>
-    
+    <div class="back-img"></div>
+
     <div class="container">
         <!-- Imagen centrada con borde -->
         <div class="image-container">
@@ -18,17 +19,22 @@
                 <h2 id="song-title">Título de la Canción</h2>
                 <p id="song-author">Nombre del Autor</p>
                 <p id="song-description">Descripción de la canción...</p>
-            </div>
+            </div>  
             <div class="controls-panel">
-                <button id="prev-btn">Anterior</button>
-                <button id="rewind-btn">-5s</button>
-                <button id="play-pause-btn">▶</button>
-                <button id="forward-btn">+5s</button>
-                <button id="next-btn">Siguiente</button>
+                <div>
+                    <button id="rewind-btn">-5s</button>
+                    <button id="play-pause-btn">▶</button>
+                    <button id="forward-btn">+5s</button>
+                </div>
+                <div>
+                    <button id="prev-btn">Anterior</button>
+                    <button id="next-btn">Siguiente</button>
+                </div>
                 <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1">
-            </div>
+            </div>         
         </div>
     </div>
+
 
     <audio id="audio-player"></audio>
     <script src="./src/js/index.js"></script>
