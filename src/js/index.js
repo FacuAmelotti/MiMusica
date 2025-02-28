@@ -221,7 +221,7 @@ playPauseBtn.addEventListener("click", async () => {
     if (audioPlayer.paused) {
         try {
             await audioPlayer.play();
-            playPauseBtn.textContent = "Pausa";
+            playPauseBtn.textContent = "||";
             setupAudioAnalysis();
         } catch (error) {
             console.error("Error al reproducir el audio:", error);
