@@ -1,21 +1,21 @@
 // Lista de canciones
 const songs = [
     { 
+        title: "Cognose", 
+        author: "Fakito", 
+        description: "#Tech", 
+        image: "./src/img/cognosce.png", 
+        audio: "./src/audio/cognosce.mp3", 
+        color: "#58276a" 
+    },
+    { 
         title: "Bla Bla", 
         author: "Fakito", 
         description: "#Electro", 
         image: "./src/img/bla.png", 
         audio: "./src/audio/bla.mp3", 
         color: "#878286" 
-    },
-    { 
-        title: "Cognose", 
-        author: "Fakito", 
-        description: "#Electro", 
-        image: "./src/img/cognosce.png", 
-        audio: "./src/audio/cognosce.mp3", 
-        color: "#58276a" 
-    },
+    },   
     { 
         title: "Inter Infinitum", 
         author: "Fakito", 
@@ -23,14 +23,14 @@ const songs = [
         image: "./src/img/inter-infinitum.png", 
         audio: "./src/audio/inter-infinitum.mp3", 
         color: "#fc766b" 
-    },
+    }, 
     { 
-        title: "Per Se", 
+        title: "Tenebris", 
         author: "Fakito", 
-        description: "#Dubs", 
-        image: "./src/img/perse.png", 
-        audio: "./src/audio/perse.mp3", 
-        color: "#bcb35e" 
+        description: "#Electro", 
+        image: "./src/img/tenebris.png", 
+        audio: "./src/audio/tenebris.mp3", 
+        color: "#323232" 
     },
     { 
         title: "Concussa", 
@@ -41,28 +41,20 @@ const songs = [
         color: "#e741cb" 
     },
     { 
-        title: "Tenebris", 
-        author: "Fakito", 
-        description: "#Deep", 
-        image: "./src/img/tenebris.png", 
-        audio: "./src/audio/tenebris.mp3", 
-        color: "#323232" 
-    },
-    { 
-        title: "Victus", 
-        author: "Fakito", 
-        description: "#Dubs", 
-        image: "./src/img/victus.png", 
-        audio: "./src/audio/victus.mp3", 
-        color: "#937d1b" 
-    },
-    { 
         title: "Ignis", 
         author: "Fakito", 
-        description: "#Electro", 
+        description: "#Tech", 
         image: "./src/img/ignis.png", 
         audio: "./src/audio/ignis.mp3", 
         color: "#484848" 
+    },
+    { 
+        title: "Internumize", 
+        author: "Fakito", 
+        description: "#Electro", 
+        image: "./src/img/Internumize.png", 
+        audio: "./src/audio/internumize.mp3", 
+        color: "#535353" 
     },
     { 
         title: "Amissa morale", 
@@ -73,12 +65,20 @@ const songs = [
         color: "#535353" 
     },
     { 
-        title: "Internumize", 
+        title: "Victus", 
         author: "Fakito", 
         description: "#Electro", 
-        image: "./src/img/Internumize.png", 
-        audio: "./src/audio/internumize.mp3", 
-        color: "#535353" 
+        image: "./src/img/victus.png", 
+        audio: "./src/audio/victus.mp3", 
+        color: "#937d1b" 
+    },
+    { 
+        title: "Per Se", 
+        author: "Fakito", 
+        description: "#Dubs", 
+        image: "./src/img/perse.png", 
+        audio: "./src/audio/perse.mp3", 
+        color: "#bcb35e" 
     },
     { 
         title: "Occasus Solis", 
@@ -115,7 +115,7 @@ const songs = [
     { 
         title: "Caesar", 
         author: "Fakito", 
-        description: "#Tech", 
+        description: "#Beat", 
         image: "./src/img/caesar.jpeg", 
         audio: "./src/audio/caesar.mp3", 
         color: "#8e7f4a" 
