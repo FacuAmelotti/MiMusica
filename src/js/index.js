@@ -115,7 +115,7 @@ const songs = [
         description: "#Dubs", 
         image: "./src/img/perse.png", 
         audio: "./src/audio/perse.mp3", 
-        color: "#976c15" 
+        color: "#ceb087" 
     },
     { 
         title: "Occasus Solis", 
@@ -124,7 +124,7 @@ const songs = [
         description: "#Electro", 
         image: "./src/img/occasus.png", 
         audio: "./src/audio/occasus-solis.mp3", 
-        color: "#766f4b" 
+        color: "#ceb087" 
     },
     { 
         title: "Damnum", 
@@ -160,7 +160,7 @@ const songs = [
         description: "#GameSong", 
         image: "./src/img/elegans.png", 
         audio: "./src/audio/elegans.mp3", 
-        color: "#484848" 
+        color: "#ab8646" 
     },
     { 
         title: "Inanis", 
@@ -205,7 +205,7 @@ const songs = [
         description: "#Experimental", 
         image: "./src/img/facinorase.jpg", 
         audio: "./src/audio/facinorase.mp3", 
-        color: "#9c8d55" 
+        color: "#251901" 
     },
     { 
         title: "Caesar", 
@@ -214,7 +214,7 @@ const songs = [
         description: "#Beat", 
         image: "./src/img/caesar.jpeg", 
         audio: "./src/audio/caesar.mp3", 
-        color: "#8e7f4a" 
+        color: "#716140" 
     },
     { 
         title: "Cold", 
@@ -223,7 +223,7 @@ const songs = [
         description: "#Beat", 
         image: "./src/img/cold.png", 
         audio: "./src/audio/cold.mp3", 
-        color: "#296b7a" 
+        color: "#1d1f3b" 
     },
     { 
         title: "Dimissi", 
@@ -232,7 +232,7 @@ const songs = [
         description: "#Beat", 
         image: "./src/img/dimissi.png", 
         audio: "./src/audio/dimissi.mp3", 
-        color: "#ae6b2b" 
+        color: "#894b2c" 
     },
     { 
         title: "Cassete", 
@@ -241,7 +241,7 @@ const songs = [
         description: "#Beat", 
         image: "./src/img/cassete.png", 
         audio: "./src/audio/cassete.mp3", 
-        color: "#b6b5b5" 
+        color: "#827d7a" 
     },
     { 
         title: "Non Vident", 
@@ -259,7 +259,7 @@ const songs = [
         description: "#Beat", 
         image: "./src/img/vesperi.png", 
         audio: "./src/audio/vesperi.mp3", 
-        color: "#232323" 
+        color: "#170e0b" 
     },
     { 
         title: "Boulevard", 
