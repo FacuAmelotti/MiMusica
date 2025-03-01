@@ -376,7 +376,6 @@ songs.forEach((song, index) => {
     trackLink.textContent = `${index + 1}. ${song.title} (${song.description})`;
    // trackLink.style.color = song.color;
 
-
     trackLink.addEventListener("click", (event) => {
         event.preventDefault(); // Evita la navegación predeterminada
         currentSongIndex = index; // Actualiza el índice actual
@@ -385,6 +384,7 @@ songs.forEach((song, index) => {
         audioPlayer.play(); // Inicia la reproducción
         playPauseBtn.textContent = "||"; // Cambia el botón de pausa
         trackTitle.textContent = `Canción: ${currentSongIndex + 1}/${songs.length}`; // Actualiza el título
+        setupAudioAnalysis();
     });
 
     trackItem.appendChild(trackLink);
