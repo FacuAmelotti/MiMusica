@@ -14,7 +14,7 @@ const songs = [
         description: "#Electro", 
         image: "./src/img/bla.png", 
         audio: "./src/audio/bla.mp3", 
-        color: "#878286" 
+        color: "#978286" 
     },   
     { 
         title: "Inter Infinitum", 
@@ -22,7 +22,7 @@ const songs = [
         description: "#Chill", 
         image: "./src/img/inter-infinitum.png", 
         audio: "./src/audio/inter-infinitum.mp3", 
-        color: "#fc766b" 
+        color: "#fc566b" 
     }, 
     { 
         title: "Tenebris", 
@@ -44,9 +44,9 @@ const songs = [
         title: "Ignis", 
         author: "Fakito", 
         description: "#Tech", 
-        image: "./src/img/ignis.png", 
+        image: "./src/img/ignis.jpg", 
         audio: "./src/audio/ignis.mp3", 
-        color: "#484848" 
+        color: "#97123c" 
     },
     { 
         title: "Internumize", 
@@ -68,9 +68,9 @@ const songs = [
         title: "Victus", 
         author: "Fakito", 
         description: "#Electro", 
-        image: "./src/img/victus.png", 
+        image: "./src/img/victus.jpg", 
         audio: "./src/audio/victus.mp3", 
-        color: "#937d1b" 
+        color: "#5b1010" 
     },
     { 
         title: "Per Se", 
@@ -78,7 +78,7 @@ const songs = [
         description: "#Dubs", 
         image: "./src/img/perse.png", 
         audio: "./src/audio/perse.mp3", 
-        color: "#bcb35e" 
+        color: "#976c15" 
     },
     { 
         title: "Occasus Solis", 
@@ -89,12 +89,44 @@ const songs = [
         color: "#766f4b" 
     },
     { 
+        title: "Voluptas", 
+        author: "Fakito", 
+        description: "#GameSong #Tech", 
+        image: "./src/img/voluptas.jpg", 
+        audio: "./src/audio/voluptas.mp3", 
+        color: "#1e1227" 
+    },
+    { 
         title: "Extraneus", 
         author: "Fakito", 
         description: "#GameSong", 
-        image: "./src/img/extraneus.jpeg", 
+        image: "./src/img/extraneus.jpg", 
         audio: "./src/audio/extraneus.mp3", 
         color: "#1e1227" 
+    },
+    { 
+        title: "Elegans", 
+        author: "Fakito", 
+        description: "#GameSong", 
+        image: "./src/img/elegans.png", 
+        audio: "./src/audio/elegans.mp3", 
+        color: "#484848" 
+    },
+    { 
+        title: "Inanis", 
+        author: "Fakito", 
+        description: "#GameSong #Deep", 
+        image: "./src/img/inanis.png", 
+        audio: "./src/audio/inanis.mp3", 
+        color: "#121212" 
+    },
+    { 
+        title: "Instrumenta", 
+        author: "Fakito", 
+        description: "#GameSong #Tech", 
+        image: "./src/img/instrumenta.jpg", 
+        audio: "./src/audio/instrumenta.mp3", 
+        color: "#74286e" 
     },
     { 
         title: "Cold", 
