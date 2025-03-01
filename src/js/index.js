@@ -10,15 +10,6 @@ const songs = [
         color: "#58276a" 
     }, 
     { 
-        title: "Cosmic Gate", 
-        author: "Fakito", 
-        description: "#Electro #Voice", 
-        nota: "4",
-        image: "./src/img/cosmic-gate.png", 
-        audio: "./src/audio/cosmic-gate.mp3", 
-        color: "#121212" 
-    }, 
-    { 
         title: "Tenebris", 
         author: "Fakito", 
         nota: "4",
@@ -126,6 +117,15 @@ const songs = [
         audio: "./src/audio/occasus-solis.mp3", 
         color: "#ceb087" 
     },
+    { 
+        title: "Cosmic Gate", 
+        author: "Fakito", 
+        description: "#Electro #Voice", 
+        nota: "4",
+        image: "./src/img/cosmic-gate.png", 
+        audio: "./src/audio/cosmic-gate.mp3", 
+        color: "#121212" 
+    }, 
     { 
         title: "Damnum", 
         author: "Fakito", 
@@ -292,6 +292,29 @@ let source;
 let bufferLength;
 let dataArray;
 
+// Crear elementos para el checkbox de autoplay
+const autoplayContainer = document.createElement("div");
+autoplayContainer.style.display = "flex";
+autoplayContainer.style.alignItems = "center";
+autoplayContainer.style.gap = "8px";
+autoplayContainer.style.marginTop = "10px";
+
+const autoplayCheckbox = document.createElement("input");
+autoplayCheckbox.type = "checkbox";
+autoplayCheckbox.id = "autoplay-checkbox";
+autoplayCheckbox.checked = true; // Activado por defecto
+
+const autoplayLabel = document.createElement("label");
+autoplayLabel.htmlFor = "autoplay-checkbox";
+autoplayLabel.textContent = "Autoplay";
+autoplayLabel.style.color = "#fff";
+
+autoplayContainer.appendChild(autoplayCheckbox);
+autoplayContainer.appendChild(autoplayLabel);
+
+// Agregar al panel de controles
+document.querySelector(".controls-panel").appendChild(autoplayContainer);
+
 // Función para actualizar la cantidad de nieve dependiendo de la canción
 function updateSnowfall() {
     // Limpiar la nieve existente antes de agregar una nueva
@@ -382,6 +405,8 @@ function loadSong(index) {
     songDescription.textContent = song.description;
     document.body.style.backgroundColor = song.color;
 
+    autoplayCheckbox.style.accentColor = song.color;
+        
     songNote.textContent = song.note;
 
     // Agregar estrellas
@@ -418,6 +443,15 @@ function loadSong(index) {
     volumeSlider.style.setProperty("--song-color", song.color);
     volumeSlider.dispatchEvent(new Event("input"));
 }
+
+audioPlayer.addEventListener("ended", () => {
+    if (autoplayCheckbox.checked) {
+        currentSongIndex = (currentSongIndex + 1) % songs.length;
+        loadSong(currentSongIndex);
+        audioPlayer.play();
+        playPauseBtn.textContent = "||";
+    }
+});
 
 // Cargar la primera canción al iniciar
 loadSong(currentSongIndex);
@@ -536,6 +570,7 @@ style.textContent = `
         border-radius: 10px;
     }
 `;
+
 
 document.head.appendChild(style);
 
