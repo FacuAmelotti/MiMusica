@@ -142,3 +142,49 @@ body {
 .snowfall-flakes {
     z-index: -5;
 }
+
+.panel-inicial {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.98);
+    z-index: 10;
+    height: 100vh;
+    width: 100vw;
+    text-align: center;
+    align-content: center;
+}
+
+.panel-inicial button {
+    border: none;
+    width: 132px;
+    height: 36px;
+    background-color: rgb(75, 16, 99);
+    padding: 6px 12px;
+    margin-top: 12px;
+    color: rgb(189, 188, 188);
+    font-size: 1.36rem;
+}
+
+.panel-inicial div {
+    background-color: rgb(19, 18, 18);
+    padding: 32px;
+    margin: 12px 20%;
+    border: 1px solid rgb(50, 40, 63);
+}
+
+.panel-inicial div h1 {
+    color: rgb(136, 61, 206);
+    margin-bottom: 12px;
+    font-size: 2.5rem;
+}
+
+.panel-inicial button:hover {
+    background-color: rgb(91, 9, 168);
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.panel-inicial p {
+    color: rgb(133, 133, 133);
+    margin-top: 12px;
+    font-size: 1.24rem;
+}

@@ -319,6 +319,14 @@ window.onload = function() {
     });
 };
 
+document.addEventListener("DOMContentLoaded", function () {
+    const panel = document.querySelector(".panel-inicial");
+    const botonCerrar = document.querySelector(".cerrar-panel-inicial");
+
+    botonCerrar.addEventListener("click", function () {
+        panel.style.display = "none";
+    });
+});
 
 // Configuración del control de volumen
 volumeSlider.addEventListener("input", function () {
