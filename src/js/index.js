@@ -4,6 +4,7 @@ const songs = [
         title: "Cognose", 
         author: "Fakito", 
         description: "#Tech", 
+        nota: "5",
         image: "./src/img/cognosce.png", 
         audio: "./src/audio/cognosce.mp3", 
         color: "#58276a" 
@@ -12,6 +13,7 @@ const songs = [
         title: "Bla Bla", 
         author: "Fakito", 
         description: "#Electro", 
+        nota: "3",
         image: "./src/img/bla.png", 
         audio: "./src/audio/bla.mp3", 
         color: "#978286" 
@@ -20,6 +22,7 @@ const songs = [
         title: "Inter Infinitum", 
         author: "Fakito", 
         description: "#Chill", 
+        nota: "3",
         image: "./src/img/inter-infinitum.png", 
         audio: "./src/audio/inter-infinitum.mp3", 
         color: "#fc566b" 
@@ -27,6 +30,7 @@ const songs = [
     { 
         title: "Tenebris", 
         author: "Fakito", 
+        nota: "4",
         description: "#Electro", 
         image: "./src/img/tenebris.png", 
         audio: "./src/audio/tenebris.mp3", 
@@ -34,7 +38,8 @@ const songs = [
     },
     { 
         title: "Concussa", 
-        author: "Fakito", 
+        author: "Fakito",
+        nota: "5", 
         description: "#Dubs", 
         image: "./src/img/concussa.png", 
         audio: "./src/audio/concussa.mp3", 
@@ -43,6 +48,7 @@ const songs = [
     { 
         title: "Ignis", 
         author: "Fakito", 
+        nota: "4",
         description: "#Tech", 
         image: "./src/img/ignis.jpg", 
         audio: "./src/audio/ignis.mp3", 
@@ -51,6 +57,7 @@ const songs = [
     { 
         title: "Internumize", 
         author: "Fakito", 
+        nota: "4",
         description: "#Electro", 
         image: "./src/img/Internumize.png", 
         audio: "./src/audio/internumize.mp3", 
@@ -59,7 +66,8 @@ const songs = [
     { 
         title: "Amissa morale", 
         author: "Fakito", 
-        description: "#Electro", 
+        description: "#Electro",
+        nota: "3", 
         image: "./src/img/amissa-morale.png", 
         audio: "./src/audio/amissa-morale.mp3", 
         color: "#535353" 
@@ -67,6 +75,7 @@ const songs = [
     { 
         title: "Victus", 
         author: "Fakito", 
+        nota: "4",
         description: "#Electro", 
         image: "./src/img/victus.jpg", 
         audio: "./src/audio/victus.mp3", 
@@ -75,6 +84,7 @@ const songs = [
     { 
         title: "Per Se", 
         author: "Fakito", 
+        nota: "4",
         description: "#Dubs", 
         image: "./src/img/perse.png", 
         audio: "./src/audio/perse.mp3", 
@@ -83,6 +93,7 @@ const songs = [
     { 
         title: "Occasus Solis", 
         author: "Fakito", 
+        nota: "4",
         description: "#Electro", 
         image: "./src/img/occasus.png", 
         audio: "./src/audio/occasus-solis.mp3", 
@@ -90,7 +101,8 @@ const songs = [
     },
     { 
         title: "Voluptas", 
-        author: "Fakito", 
+        author: "Fakito",
+        nota: "3", 
         description: "#GameSong #Tech", 
         image: "./src/img/voluptas.jpg", 
         audio: "./src/audio/voluptas.mp3", 
@@ -99,6 +111,7 @@ const songs = [
     { 
         title: "Extraneus", 
         author: "Fakito", 
+        nota: "4",
         description: "#GameSong", 
         image: "./src/img/extraneus.jpg", 
         audio: "./src/audio/extraneus.mp3", 
@@ -107,6 +120,7 @@ const songs = [
     { 
         title: "Elegans", 
         author: "Fakito", 
+        nota: "3",
         description: "#GameSong", 
         image: "./src/img/elegans.png", 
         audio: "./src/audio/elegans.mp3", 
@@ -114,7 +128,8 @@ const songs = [
     },
     { 
         title: "Inanis", 
-        author: "Fakito", 
+        author: "Fakito",
+        nota: "4", 
         description: "#GameSong #Deep", 
         image: "./src/img/inanis.png", 
         audio: "./src/audio/inanis.mp3", 
@@ -123,6 +138,7 @@ const songs = [
     { 
         title: "Instrumenta", 
         author: "Fakito", 
+        nota: "3",
         description: "#GameSong #Tech", 
         image: "./src/img/instrumenta.jpg", 
         audio: "./src/audio/instrumenta.mp3", 
@@ -131,6 +147,7 @@ const songs = [
     { 
         title: "Cold", 
         author: "Fakito", 
+        nota: "4",
         description: "#Beat", 
         image: "./src/img/cold.png", 
         audio: "./src/audio/cold.mp3", 
@@ -139,6 +156,7 @@ const songs = [
     { 
         title: "Boulevard", 
         author: "Fakito", 
+        nota: "4",
         description: "#Beat", 
         image: "./src/img/boulevard.png", 
         audio: "./src/audio/boulevard.mp3", 
@@ -146,7 +164,8 @@ const songs = [
     },
     { 
         title: "Caesar", 
-        author: "Fakito", 
+        author: "Fakito",
+        nota: "3", 
         description: "#Beat", 
         image: "./src/img/caesar.jpeg", 
         audio: "./src/audio/caesar.mp3", 
@@ -173,6 +192,34 @@ let analyser;
 let source;
 let bufferLength;
 let dataArray;
+
+// Función para actualizar la cantidad de nieve dependiendo de la canción
+function updateSnowfall() {
+    // Limpiar la nieve existente antes de agregar una nueva
+    snowFall.snow(document.body, "clear"); // Limpiar nieve
+    const flakesCount = currentSongIndex * 10 + 50; // Aumenta la cantidad de nieve según el índice de la canción
+    snowFall.snow(document.body, {  
+        flakeCount: flakesCount,  
+        flakeColor: "#ffffff",  
+        minSize: 2,  
+        maxSize: 5,  
+        minSpeed: 1,  
+        maxSpeed: 3  
+    });
+}
+
+// Al cargar la página o cuando se inicia la canción, actualiza el efecto de nieve
+window.onload = function() {
+    snowFall.snow(document.body, {  
+        flakeCount: 50,  
+        flakeColor: "#ffffff",  
+        minSize: 2,  
+        maxSize: 5,  
+        minSpeed: 1,  
+        maxSpeed: 3  
+    });
+};
+
 
 // Configuración del control de volumen
 volumeSlider.addEventListener("input", function () {
@@ -228,6 +275,26 @@ function loadSong(index) {
     songDescription.textContent = song.description;
     document.body.style.backgroundColor = song.color;
 
+    songNote.textContent = song.note;
+
+    // Agregar estrellas
+    const noteValue = parseInt(song.nota, 10); // Convertir nota a número
+    songNote.innerHTML = `Nota personal: `;
+
+    for (let i = 0; i < noteValue; i++) {
+        const starImg = document.createElement("img");
+        starImg.src = "./src/img/star.png"; // Reemplaza con la ruta correcta de tu estrella
+        starImg.alt = "⭐";
+        starImg.style.width = "20px"; 
+        starImg.style.height = "20px"; 
+        starImg.style.marginRight = "3px";
+        songNote.appendChild(starImg);
+    }
+
+    // Agregar " / 10" después de las estrellas
+    const textNode = document.createTextNode(` / 10`);
+    songNote.appendChild(textNode);
+
     backgroundPanel.style.backgroundImage = `url(${song.image})`;
     backgroundPanel.style.backgroundSize = "cover";
     backgroundPanel.style.backgroundPosition = "center";
@@ -270,6 +337,7 @@ nextBtn.addEventListener("click", () => {
     audioPlayer.currentTime = 0;
     audioPlayer.pause();
     playPauseBtn.textContent = "▶";
+    updateSnowfall(); // Actualiza la cantidad de nieve al cambiar la canción
 });
 
 prevBtn.addEventListener("click", () => {
@@ -278,6 +346,7 @@ prevBtn.addEventListener("click", () => {
     audioPlayer.currentTime = 0;
     audioPlayer.pause();
     playPauseBtn.textContent = "▶";
+    updateSnowfall(); // Actualiza la cantidad de nieve al cambiar la canción
 });
 
 rewindBtn.addEventListener("click", () => {
@@ -287,3 +356,43 @@ rewindBtn.addEventListener("click", () => {
 forwardBtn.addEventListener("click", () => {
     audioPlayer.currentTime += 5;
 });
+
+// Crear panel-tracks
+const panelTracks = document.createElement("div");
+panelTracks.classList.add("panel-tracks");
+
+// Agregar título con el número total de canciones
+const trackTitle = document.createElement("p");
+trackTitle.textContent = `Canción: ${currentSongIndex + 1}/${songs.length}`;
+panelTracks.appendChild(trackTitle);
+
+// Crear lista de canciones
+const trackList = document.createElement("ul");
+
+songs.forEach((song, index) => {
+    const trackItem = document.createElement("li");
+    const trackLink = document.createElement("a");
+    trackLink.href = "#"; // Evita que recargue la página
+    trackLink.textContent = `${index + 1}. ${song.title} (${song.description})`;
+   // trackLink.style.color = song.color;
+
+
+    trackLink.addEventListener("click", (event) => {
+        event.preventDefault(); // Evita la navegación predeterminada
+        currentSongIndex = index; // Actualiza el índice actual
+        loadSong(currentSongIndex); // Carga la canción seleccionada
+        audioPlayer.currentTime = 0; // Reinicia el tiempo
+        audioPlayer.play(); // Inicia la reproducción
+        playPauseBtn.textContent = "||"; // Cambia el botón de pausa
+        trackTitle.textContent = `Canción: ${currentSongIndex + 1}/${songs.length}`; // Actualiza el título
+    });
+
+    trackItem.appendChild(trackLink);
+    trackList.appendChild(trackItem);
+});
+
+panelTracks.appendChild(trackList);
+
+// Agregar el panel al documento
+document.body.appendChild(panelTracks); // Cámbialo si necesitas agregarlo en otro lugar
+

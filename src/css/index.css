@@ -106,3 +106,38 @@ body {
     z-index: -1; /* Asegura que esté detrás de otros elementos */
     transition: opacity 0.3s ease; /* Suaviza el cambio de opacidad */
 }
+
+.panel-tracks {
+    width: 26%;
+    background: rgba(0, 0, 0, 0.86);
+    padding: 22px;
+    margin-right: 78px;
+}
+
+.panel-tracks p {
+    color: aliceblue;
+    font-size: 1.32rem;
+    padding-bottom: 5px;
+}
+
+.panel-tracks ul li {
+    list-style:  none;
+    padding-bottom: 2px;
+}
+
+.panel-tracks ul li a {
+    padding: 2px 0;
+    text-decoration: none;
+    color: rgb(68, 68, 68);
+}
+
+.panel-tracks ul li a:hover {
+    transform: scale(1.3); /* Cambia el tamaño un 30% */
+    transition: transform 0.2s ease-in-out;
+
+    background-color: whitesmoke;
+}
+
+.snowfall-flakes {
+    z-index: -5;
+}

@@ -149,6 +149,13 @@ body {
 }
 
 /* Media Queries para móviles */
+@media (max-width: 860px) {
+    .panel-tracks {
+        display: none;
+    }
+}
+
+/* Media Queries para móviles */
 @media (max-width: 600px) {
     .container {
         width: 95%; /* Más espacio en móviles */
@@ -186,6 +193,8 @@ body {
     .controls-panel input[type="range"] {
         width: 100px;
     }
+
+    
 }
 
 /* Media Queries para tablets */
@@ -257,5 +266,13 @@ body {
 
     .controls-panel input[type="range"] {
         width: 150px;
+    }    
+
+}
+
+/* Media Queries para móviles */
+@media (max-width: 1050px) {
+    .panel-tracks {
+        display: none;
     }
 }
