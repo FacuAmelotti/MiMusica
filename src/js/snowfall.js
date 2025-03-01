@@ -158,6 +158,11 @@ var snowFall = (function () {
 
         return {
             snow: function (element, options) {
+                // Verificamos si el ancho de la ventana es mayor a 800px
+                if (window.innerWidth < 800) {
+                    return;  // No ejecutamos la animación si es mayor a 800px
+                }
+                
                 extend(defaults, options);
                 target = element;
                 height = target.offsetHeight;
@@ -216,3 +221,4 @@ var snowFall = (function () {
         }
     };
 })();
+
