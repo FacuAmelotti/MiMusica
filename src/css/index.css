@@ -108,10 +108,11 @@ body {
 }
 
 .panel-tracks {
-    width: 26%;
+    width: 32%;
     background: rgba(0, 0, 0, 0.86);
     padding: 22px;
     margin-right: 78px;
+    border-radius: 7px;
 }
 
 .panel-tracks p {

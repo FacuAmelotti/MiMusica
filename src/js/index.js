@@ -8,24 +8,15 @@ const songs = [
         image: "./src/img/cognosce.png", 
         audio: "./src/audio/cognosce.mp3", 
         color: "#58276a" 
-    },
+    }, 
     { 
-        title: "Bla Bla", 
+        title: "Cosmic Gate", 
         author: "Fakito", 
-        description: "#Electro", 
-        nota: "3",
-        image: "./src/img/bla.png", 
-        audio: "./src/audio/bla.mp3", 
-        color: "#978286" 
-    },   
-    { 
-        title: "Inter Infinitum", 
-        author: "Fakito", 
-        description: "#Chill", 
-        nota: "3",
-        image: "./src/img/inter-infinitum.png", 
-        audio: "./src/audio/inter-infinitum.mp3", 
-        color: "#fc566b" 
+        description: "#Electro #Voice", 
+        nota: "4",
+        image: "./src/img/cosmic-gate.png", 
+        audio: "./src/audio/cosmic-gate.mp3", 
+        color: "#121212" 
     }, 
     { 
         title: "Tenebris", 
@@ -46,6 +37,33 @@ const songs = [
         color: "#e741cb" 
     },
     { 
+        title: "Inter Infinitum", 
+        author: "Fakito", 
+        description: "#Chill", 
+        nota: "3",
+        image: "./src/img/inter-infinitum.png", 
+        audio: "./src/audio/inter-infinitum.mp3", 
+        color: "#fc566b" 
+    }, 
+    { 
+        title: "Lapsus", 
+        author: "Fakito", 
+        nota: "3",
+        description: "#Experimental", 
+        image: "./src/img/lapsus.jpg", 
+        audio: "./src/audio/lapsus.mp3", 
+        color: "#806894" 
+    },
+    { 
+        title: "Bla Bla", 
+        author: "Fakito", 
+        description: "#Electro", 
+        nota: "3",
+        image: "./src/img/bla.png", 
+        audio: "./src/audio/bla.mp3", 
+        color: "#978286" 
+    },  
+    { 
         title: "Ignis", 
         author: "Fakito", 
         nota: "4",
@@ -53,6 +71,15 @@ const songs = [
         image: "./src/img/ignis.jpg", 
         audio: "./src/audio/ignis.mp3", 
         color: "#97123c" 
+    },
+    { 
+        title: "Damnare", 
+        author: "Fakito",
+        nota: "4", 
+        description: "#Electro", 
+        image: "./src/img/damnare.jpg", 
+        audio: "./src/audio/damnare.mp3", 
+        color: "#d38ebc" 
     },
     { 
         title: "Internumize", 
@@ -100,6 +127,15 @@ const songs = [
         color: "#766f4b" 
     },
     { 
+        title: "Damnum", 
+        author: "Fakito", 
+        nota: "1",
+        description: "#Experimental", 
+        image: "./src/img/damnum.png", 
+        audio: "./src/audio/damnum.mp3", 
+        color: "#212121" 
+    },
+    { 
         title: "Voluptas", 
         author: "Fakito",
         nota: "3", 
@@ -136,6 +172,15 @@ const songs = [
         color: "#121212" 
     },
     { 
+        title: "Ignosce", 
+        author: "Fakito", 
+        nota: "3",
+        description: "#Electro", 
+        image: "./src/img/ignosce.jpg", 
+        audio: "./src/audio/ignosce.mp3", 
+        color: "#6a8f93" 
+    },
+    { 
         title: "Instrumenta", 
         author: "Fakito", 
         nota: "3",
@@ -143,6 +188,33 @@ const songs = [
         image: "./src/img/instrumenta.jpg", 
         audio: "./src/audio/instrumenta.mp3", 
         color: "#74286e" 
+    },
+    { 
+        title: "Vetus Somnia", 
+        author: "Fakito",
+        nota: "2", 
+        description: "#Electro", 
+        image: "./src/img/vetus-somnia.png", 
+        audio: "./src/audio/vetus-somnia.mp3", 
+        color: "#6a87b6" 
+    },
+    { 
+        title: "Facinorase", 
+        author: "Fakito",
+        nota: "1", 
+        description: "#Experimental", 
+        image: "./src/img/facinorase.jpg", 
+        audio: "./src/audio/facinorase.mp3", 
+        color: "#9c8d55" 
+    },
+    { 
+        title: "Caesar", 
+        author: "Fakito",
+        nota: "3", 
+        description: "#Beat", 
+        image: "./src/img/caesar.jpeg", 
+        audio: "./src/audio/caesar.mp3", 
+        color: "#8e7f4a" 
     },
     { 
         title: "Cold", 
@@ -154,6 +226,42 @@ const songs = [
         color: "#296b7a" 
     },
     { 
+        title: "Dimissi", 
+        author: "Fakito", 
+        nota: "2",
+        description: "#Beat", 
+        image: "./src/img/dimissi.png", 
+        audio: "./src/audio/dimissi.mp3", 
+        color: "#ae6b2b" 
+    },
+    { 
+        title: "Cassete", 
+        author: "Fakito", 
+        nota: "2",
+        description: "#Beat", 
+        image: "./src/img/cassete.png", 
+        audio: "./src/audio/cassete.mp3", 
+        color: "#b6b5b5" 
+    },
+    { 
+        title: "Non Vident", 
+        author: "Fakito", 
+        nota: "4",
+        description: "#Beat", 
+        image: "./src/img/non-vident.png", 
+        audio: "./src/audio/non-vident.mp3", 
+        color: "#232323" 
+    },
+    { 
+        title: "Vesperi", 
+        author: "Fakito", 
+        nota: "3",
+        description: "#Beat", 
+        image: "./src/img/vesperi.png", 
+        audio: "./src/audio/vesperi.mp3", 
+        color: "#232323" 
+    },
+    { 
         title: "Boulevard", 
         author: "Fakito", 
         nota: "4",
@@ -161,15 +269,6 @@ const songs = [
         image: "./src/img/boulevard.png", 
         audio: "./src/audio/boulevard.mp3", 
         color: "#121212" 
-    },
-    { 
-        title: "Caesar", 
-        author: "Fakito",
-        nota: "3", 
-        description: "#Beat", 
-        image: "./src/img/caesar.jpeg", 
-        audio: "./src/audio/caesar.mp3", 
-        color: "#8e7f4a" 
     }
 ];
 
@@ -383,7 +482,7 @@ songs.forEach((song, index) => {
         audioPlayer.currentTime = 0; // Reinicia el tiempo
         audioPlayer.play(); // Inicia la reproducción
         playPauseBtn.textContent = "||"; // Cambia el botón de pausa
-        trackTitle.textContent = `Canción: ${currentSongIndex + 1}/${songs.length}`; // Actualiza el título
+        trackTitle.textContent = `Track: ${currentSongIndex + 1}/${songs.length}`; // Actualiza el título
         setupAudioAnalysis();
     });
 
@@ -391,7 +490,46 @@ songs.forEach((song, index) => {
     trackList.appendChild(trackItem);
 });
 
-panelTracks.appendChild(trackList);
+// Crear un contenedor para las canciones con scroll
+const trackListContainer = document.createElement("div");
+trackListContainer.classList.add("track-list-container");
+trackListContainer.appendChild(trackList);
+panelTracks.appendChild(trackListContainer);
+
+// Establecer estilos CSS
+const style = document.createElement("style");
+style.textContent = `
+    .track-list-container {
+        max-height: 500px;  /* Establecer el alto máximo */
+        overflow-y: auto;  /* Habilitar el desplazamiento vertical */        
+    }
+    .track-list-container ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    .track-list-container li {
+        padding: 5px;
+    }
+
+        /* Scroll personalizado */
+    .track-list-container::-webkit-scrollbar {
+        width: 8px;
+    }
+    .track-list-container::-webkit-scrollbar-thumb {
+        background-color:rgb(223, 223, 223);  /* Color del pulgar del scroll */
+        border-radius: 10px;  /* Bordes redondeados del pulgar */
+        transition: background-color 0.3s ease;
+    }
+    .track-list-container::-webkit-scrollbar-thumb:hover {
+        background-color:rgb(255, 255, 255);  /* Color del pulgar al pasar el mouse */
+    }
+    .track-list-container::-webkit-scrollbar-track {
+        background-color: rgba(255, 255, 255, 0.1);  /* Color del fondo del scroll */
+        border-radius: 10px;
+    }
+`;
+
+document.head.appendChild(style);
 
 // Agregar el panel al documento
 document.body.appendChild(panelTracks); // Cámbialo si necesitas agregarlo en otro lugar
