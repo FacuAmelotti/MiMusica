@@ -285,6 +285,7 @@ const rewindBtn = document.getElementById("rewind-btn");
 const forwardBtn = document.getElementById("forward-btn");
 const volumeSlider = document.getElementById("volume-slider");
 const backgroundPanel = document.querySelector(".background-panel");
+const listBtn = document.querySelector(".button-panel-inicial");
 
 let audioContext;
 let analyser;
@@ -404,6 +405,7 @@ function loadSong(index) {
     songAuthor.textContent = song.author;
     songDescription.textContent = song.description;
     document.body.style.backgroundColor = song.color;
+    listBtn.style.backgroundColor = song.color;    
 
     autoplayCheckbox.style.accentColor = song.color;
         
@@ -496,6 +498,17 @@ rewindBtn.addEventListener("click", () => {
 
 forwardBtn.addEventListener("click", () => {
     audioPlayer.currentTime += 5;
+});
+
+listBtn.addEventListener("click", (event) => {
+    if (event.target === listBtn) { // Verifica si se hace click fuera del contenido
+        if(panelTracks.style.display == "block"){
+            panelTracks.style.display = "none";
+        }
+        else{
+            panelTracks.style.display = "block";
+        }
+    }
 });
 
 // Crear panel-tracks

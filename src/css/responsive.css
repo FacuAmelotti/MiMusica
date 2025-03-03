@@ -148,11 +148,22 @@ body {
     transition: opacity 0.3s ease;
 }
 
+.button-panel-inicial {
+    display:none;
+}
+
 /* Media Queries para móviles */
 @media (max-width: 860px) {
     .panel-tracks {
         display: none;
     }
+
+    .panel-inicial div {
+        background-color: rgb(19, 18, 18);
+        padding: 32px;
+        margin: 12px 10%;
+        border: 1px solid rgb(50, 40, 63);
+    }    
 }
 
 /* Media Queries para móviles */
@@ -273,7 +284,23 @@ body {
 
 /* Media Queries para móviles */
 @media (max-width: 1050px) {
+
+   .button-panel-inicial {
+        display:block;
+        z-index: 92;
+        right: 0;
+        top: 0;
+        margin-top: 12px;
+        margin-right: 42px;
+   }
+
     .panel-tracks {
+        z-index: 91;
+        background-color: #0a0a0a;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+        position: absolute;
         display: none;
     }
 }
