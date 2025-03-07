@@ -7,7 +7,16 @@ const songs = [
         nota: "5",
         image: "./src/img/cognosce.png", 
         audio: "./src/audio/cognosce.mp3", 
-        color: "#58276a" 
+        color: "#361158" 
+    }, 
+    { 
+        title: "Bla Bla", 
+        author: "Fakito", 
+        description: "#Electro", 
+        nota: "3",
+        image: "./src/img/bla.png", 
+        audio: "./src/audio/bla.mp3", 
+        color: "#1a1a1a" 
     }, 
     { 
         title: "Tenebris", 
@@ -16,7 +25,7 @@ const songs = [
         description: "#Electro", 
         image: "./src/img/tenebris.png", 
         audio: "./src/audio/tenebris.mp3", 
-        color: "#323232" 
+        color: "#7a7660" 
     },
     { 
         title: "Concussa", 
@@ -25,7 +34,7 @@ const songs = [
         description: "#Dubs", 
         image: "./src/img/concussa.png", 
         audio: "./src/audio/concussa.mp3", 
-        color: "#e741cb" 
+        color: "#2b2b2b" 
     },
     { 
         title: "Inter Infinitum", 
@@ -34,7 +43,7 @@ const songs = [
         nota: "3",
         image: "./src/img/inter-infinitum.png", 
         audio: "./src/audio/inter-infinitum.mp3", 
-        color: "#fc566b" 
+        color: "#77345b" 
     }, 
     { 
         title: "Lapsus", 
@@ -43,25 +52,16 @@ const songs = [
         description: "#Experimental", 
         image: "./src/img/lapsus.jpg", 
         audio: "./src/audio/lapsus.mp3", 
-        color: "#806894" 
-    },
-    { 
-        title: "Bla Bla", 
-        author: "Fakito", 
-        description: "#Electro", 
-        nota: "3",
-        image: "./src/img/bla.png", 
-        audio: "./src/audio/bla.mp3", 
-        color: "#978286" 
-    },  
+        color: "#542d7d" 
+    }, 
     { 
         title: "Ignis", 
         author: "Fakito", 
         nota: "4",
         description: "#Tech", 
-        image: "./src/img/ignis.jpg", 
+        image: "./src/img/ignis.png", 
         audio: "./src/audio/ignis.mp3", 
-        color: "#97123c" 
+        color: "#975a1e" 
     },
     { 
         title: "Damnare", 
@@ -70,14 +70,14 @@ const songs = [
         description: "#Electro", 
         image: "./src/img/damnare.jpg", 
         audio: "./src/audio/damnare.mp3", 
-        color: "#d38ebc" 
+        color: "#a35984" 
     },
     { 
         title: "Internumize", 
         author: "Fakito", 
         nota: "4",
         description: "#Electro", 
-        image: "./src/img/Internumize.png", 
+        image: "./src/img/Internumize.jpg", 
         audio: "./src/audio/internumize.mp3", 
         color: "#535353" 
     },
@@ -88,7 +88,7 @@ const songs = [
         nota: "3", 
         image: "./src/img/amissa-morale.png", 
         audio: "./src/audio/amissa-morale.mp3", 
-        color: "#535353" 
+        color: "#355773" 
     },
     { 
         title: "Victus", 
@@ -106,16 +106,16 @@ const songs = [
         description: "#Dubs", 
         image: "./src/img/perse.png", 
         audio: "./src/audio/perse.mp3", 
-        color: "#ceb087" 
+        color: "#2c4a56" 
     },
     { 
         title: "Occasus Solis", 
         author: "Fakito", 
         nota: "4",
         description: "#Electro", 
-        image: "./src/img/occasus.png", 
+        image: "./src/img/occasus.jpeg", 
         audio: "./src/audio/occasus-solis.mp3", 
-        color: "#ceb087" 
+        color: "#1a1a1a" 
     },
     { 
         title: "Cosmic Gate", 
@@ -133,7 +133,7 @@ const songs = [
         description: "#Experimental", 
         image: "./src/img/damnum.png", 
         audio: "./src/audio/damnum.mp3", 
-        color: "#212121" 
+        color: "#1b3271" 
     },
     { 
         title: "Voluptas", 
@@ -142,7 +142,7 @@ const songs = [
         description: "#GameSong #Tech", 
         image: "./src/img/voluptas.jpg", 
         audio: "./src/audio/voluptas.mp3", 
-        color: "#1e1227" 
+        color: "#392f56" 
     },
     { 
         title: "Extraneus", 
@@ -160,7 +160,7 @@ const songs = [
         description: "#GameSong", 
         image: "./src/img/elegans.png", 
         audio: "./src/audio/elegans.mp3", 
-        color: "#ab8646" 
+        color: "#a07934" 
     },
     { 
         title: "Inanis", 
@@ -187,25 +187,25 @@ const songs = [
         description: "#GameSong #Tech", 
         image: "./src/img/instrumenta.jpg", 
         audio: "./src/audio/instrumenta.mp3", 
-        color: "#74286e" 
+        color: "#733660" 
     },
     { 
         title: "Vetus Somnia", 
         author: "Fakito",
         nota: "2", 
         description: "#Electro", 
-        image: "./src/img/vetus-somnia.png", 
+        image: "./src/img/vetus-somnia.jpg", 
         audio: "./src/audio/vetus-somnia.mp3", 
-        color: "#6a87b6" 
+        color: "#cb5276" 
     },
     { 
         title: "Facinorase", 
         author: "Fakito",
         nota: "1", 
         description: "#Experimental", 
-        image: "./src/img/facinorase.jpg", 
+        image: "./src/img/facinorase.png", 
         audio: "./src/audio/facinorase.mp3", 
-        color: "#251901" 
+        color: "#714f2e" 
     },
     { 
         title: "Caesar", 
@@ -239,9 +239,9 @@ const songs = [
         author: "Fakito", 
         nota: "2",
         description: "#Beat", 
-        image: "./src/img/cassete.png", 
+        image: "./src/img/cassete.jpeg", 
         audio: "./src/audio/cassete.mp3", 
-        color: "#827d7a" 
+        color: "#133f55" 
     },
     { 
         title: "Non Vident", 
@@ -259,7 +259,7 @@ const songs = [
         description: "#Beat", 
         image: "./src/img/vesperi.png", 
         audio: "./src/audio/vesperi.mp3", 
-        color: "#170e0b" 
+        color: "#214261" 
     },
     { 
         title: "Boulevard", 
