@@ -443,7 +443,6 @@ function loadSong(index) {
         downloadBtn.style.border = 'none';
         downloadBtn.style.padding = '5px 20px';
         downloadBtn.style.borderRadius = '5px';
-        downloadBtn.style.marginTop = '6px';
         downloadBtn.style.cursor = 'pointer';
         downloadBtn.style.display = 'block';
 
@@ -459,11 +458,9 @@ function loadSong(index) {
     PaypalBtn.style.border = 'none';
     PaypalBtn.style.padding = '5px 20px';
     PaypalBtn.style.borderRadius = '5px';
-    PaypalBtn.style.marginTop = '6px';
     PaypalBtn.style.cursor = 'pointer';
     PaypalBtn.style.display = 'block';
     PaypalBtn.style.right = '0';
-
     
             // Funcionalidad de descarga
     downloadBtn.addEventListener('click', () => {
@@ -479,10 +476,6 @@ function loadSong(index) {
         window.open('https://paypal.me/FacundoAmelotti', '_blank');
     });
     
-    // Insertar después de las estrellas
-    songNote.parentNode.insertBefore(downloadBtn, songNote.nextSibling);
-    // Insertar después de las estrellas
-    songNote.parentNode.insertBefore(PaypalBtn, songNote.nextSibling);
 
     backgroundPanel.style.backgroundImage = `url(${song.image})`;
     backgroundPanel.style.backgroundSize = "cover";
@@ -500,19 +493,19 @@ function loadSong(index) {
     volumeSlider.dispatchEvent(new Event("input"));
 
     // Crear contenedor para botones
-const buttonContainer = document.createElement('div');
-buttonContainer.style.display = 'flex';
-buttonContainer.style.gap = '10px';
-buttonContainer.style.justifyContent = 'center';
-buttonContainer.style.marginTop = '10px';
+    const buttonContainer = document.createElement('div');
+    buttonContainer.style.display = 'flex';
+    buttonContainer.style.gap = '10px';
+    buttonContainer.style.justifyContent = 'center';
+    buttonContainer.style.marginTop = '10px';
 
-// Agregar botones al contenedor
-buttonContainer.appendChild(downloadBtn);
-buttonContainer.appendChild(PaypalBtn);
+    // Agregar botones al contenedor
+    buttonContainer.appendChild(downloadBtn);
+    buttonContainer.appendChild(PaypalBtn);
 
-// Insertar contenedor después de las estrellas
-songNote.parentNode.insertBefore(buttonContainer, songNote.nextSibling);
-}
+    // Insertar contenedor después de las estrellas
+    songNote.parentNode.insertBefore(buttonContainer, songNote.nextSibling);
+    }
 
 audioPlayer.addEventListener("ended", () => {
     if (autoplayCheckbox.checked) {
