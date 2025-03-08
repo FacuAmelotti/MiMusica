@@ -492,8 +492,13 @@ function loadSong(index) {
     volumeSlider.style.setProperty("--song-color", song.color);
     volumeSlider.dispatchEvent(new Event("input"));
 
-    // Crear contenedor para botones
+    // === Eliminar contenedor de botones anterior ===
+    const oldButtonContainer = document.querySelector('.button-container');
+    if (oldButtonContainer) oldButtonContainer.remove();
+
+    // === Crear nuevo contenedor para botones ===
     const buttonContainer = document.createElement('div');
+    buttonContainer.className = 'button-container'; // Agrega una clase identificadora
     buttonContainer.style.display = 'flex';
     buttonContainer.style.gap = '10px';
     buttonContainer.style.justifyContent = 'center';
