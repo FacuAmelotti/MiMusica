@@ -429,6 +429,61 @@ function loadSong(index) {
     const textNode = document.createTextNode(` / 10`);
     songNote.appendChild(textNode);
 
+     // === Agregar botón de descarga ===
+    // Eliminar botón anterior si existe
+    const oldBtn = document.querySelector('.download-btn');
+    if(oldBtn) oldBtn.remove();
+
+        // Crear nuevo botón
+        const downloadBtn = document.createElement('button');
+        downloadBtn.textContent = 'Descargar canción';
+        downloadBtn.className = 'download-btn';
+        downloadBtn.style.backgroundColor = song.color;
+        downloadBtn.style.color = 'white';
+        downloadBtn.style.border = 'none';
+        downloadBtn.style.padding = '5px 20px';
+        downloadBtn.style.borderRadius = '5px';
+        downloadBtn.style.marginTop = '6px';
+        downloadBtn.style.cursor = 'pointer';
+        downloadBtn.style.display = 'block';
+
+           // === Agregar botón de PayPal ===
+    const oldPaypalBtn = document.querySelector('.paypal-btn');
+    if(oldPaypalBtn) oldPaypalBtn.remove();
+
+    const PaypalBtn = document.createElement('button');
+    PaypalBtn.textContent = 'Donar 💳🎁💖';
+    PaypalBtn.className = 'paypal-btn';
+    PaypalBtn.style.backgroundColor = song.color;
+    PaypalBtn.style.color = 'white';
+    PaypalBtn.style.border = 'none';
+    PaypalBtn.style.padding = '5px 20px';
+    PaypalBtn.style.borderRadius = '5px';
+    PaypalBtn.style.marginTop = '6px';
+    PaypalBtn.style.cursor = 'pointer';
+    PaypalBtn.style.display = 'block';
+    PaypalBtn.style.right = '0';
+
+    
+            // Funcionalidad de descarga
+    downloadBtn.addEventListener('click', () => {
+        const link = document.createElement('a');
+        link.href = song.audio;
+        link.download = `${song.title.replace(/[/\\?%*:|"<>]/g, '')} - ${song.author.replace(/[/\\?%*:|"<>]/g, '')}.mp3`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    });
+
+    PaypalBtn.addEventListener('click', () => {
+        window.open('https://paypal.me/FacundoAmelotti', '_blank');
+    });
+    
+    // Insertar después de las estrellas
+    songNote.parentNode.insertBefore(downloadBtn, songNote.nextSibling);
+    // Insertar después de las estrellas
+    songNote.parentNode.insertBefore(PaypalBtn, songNote.nextSibling);
+
     backgroundPanel.style.backgroundImage = `url(${song.image})`;
     backgroundPanel.style.backgroundSize = "cover";
     backgroundPanel.style.backgroundPosition = "center";
@@ -437,13 +492,26 @@ function loadSong(index) {
     backgroundPanel.style.height= "100vh";
     backgroundPanel.style.filter = "blur(12px)";
 
-
     document.querySelectorAll(".controls-panel button").forEach(button => {
         button.style.backgroundColor = song.color;
     });
 
     volumeSlider.style.setProperty("--song-color", song.color);
     volumeSlider.dispatchEvent(new Event("input"));
+
+    // Crear contenedor para botones
+const buttonContainer = document.createElement('div');
+buttonContainer.style.display = 'flex';
+buttonContainer.style.gap = '10px';
+buttonContainer.style.justifyContent = 'center';
+buttonContainer.style.marginTop = '10px';
+
+// Agregar botones al contenedor
+buttonContainer.appendChild(downloadBtn);
+buttonContainer.appendChild(PaypalBtn);
+
+// Insertar contenedor después de las estrellas
+songNote.parentNode.insertBefore(buttonContainer, songNote.nextSibling);
 }
 
 audioPlayer.addEventListener("ended", () => {
