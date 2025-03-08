@@ -152,7 +152,7 @@ body {
     display:none;
 }
 
-/* Media Queries para móviles */
+
 @media (max-width: 860px) {
     .panel-tracks {
         display: none;
@@ -173,30 +173,37 @@ body {
     }
 
     #song-image {
-        max-height: 60vh; /* Altura máxima más pequeña para móviles */
+        margin-top: 6%;
+        max-height: 70vh; /* Altura máxima más pequeña para móviles */
+        height: 58%;
+        width: 78%;
+        position: fixed;
     }
 
     .info-panel {
-        top: 5px;
-        right: 5px;
-        padding: 6px;
+        top: 7%;
+        right: auto;    
+        width: 70%;    
+        position: fixed;
+        padding: 12px 10px;
     }
 
     .info-panel h2 {
-        font-size: 0.9rem;
+        display: inline;
+        font-size: 1.2rem;
     }
 
     .info-panel p {
+        display: inline;
         font-size: 0.8rem;
     }
 
     .controls-panel {
-        bottom: 5px;
-        padding: 6px;
+        margin-bottom: 12px;
+        position: fixed;
     }
 
     .controls-panel button {
-        height: 28px;
         width: 80px;
         font-size: 0.8rem;
     }
@@ -282,7 +289,6 @@ body {
         
 }
 
-/* Media Queries para móviles */
 @media (max-width: 1050px) {
 
    .button-panel-inicial {
