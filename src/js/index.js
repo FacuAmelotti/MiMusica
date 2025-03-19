@@ -19,6 +19,15 @@ const songs = [
         color: "#1a1a1a" 
     }, 
     { 
+        title: "Toxic", 
+        author: "Fakito", 
+        nota: "5",
+        description: "#Electro", 
+        image: "./src/img/toxic.png", 
+        audio: "./src/audio/toxic.mp3", 
+        color: "#27441e" 
+    },
+    { 
         title: "Tenebris", 
         author: "Fakito", 
         nota: "4",
@@ -117,6 +126,15 @@ const songs = [
         audio: "./src/audio/occasus-solis.mp3", 
         color: "#1a1a1a" 
     },
+    { 
+        title: "Speculum", 
+        author: "Fakito", 
+        description: "#Electro #Voice", 
+        nota: "4",
+        image: "./src/img/speculum.png", 
+        audio: "./src/audio/speculum.mp3", 
+        color: "#442e1e" 
+    }, 
     { 
         title: "Cosmic Gate", 
         author: "Fakito", 
