@@ -3,7 +3,7 @@ const songs = [
     { 
         title: "Cognose", 
         author: "Fakito", 
-        description: "#Tech", 
+        description: "#Tech ", 
         nota: "5",
         image: "./src/img/cognosce.png", 
         audio: "./src/audio/cognosce.mp3", 
@@ -289,13 +289,13 @@ const songs = [
         color: "#121212" 
     }
 ];
-
 let currentSongIndex = 0;
 const audioPlayer = document.getElementById("audio-player");
 const songImage = document.getElementById("song-image");
 const songTitle = document.getElementById("song-title");
 const songAuthor = document.getElementById("song-author");
 const songDescription = document.getElementById("song-description");
+const songNote = document.getElementById("song-note");
 const playPauseBtn = document.getElementById("play-pause-btn");
 const prevBtn = document.getElementById("prev-btn");
 const nextBtn = document.getElementById("next-btn");
@@ -321,61 +321,75 @@ autoplayContainer.style.marginTop = "10px";
 const autoplayCheckbox = document.createElement("input");
 autoplayCheckbox.type = "checkbox";
 autoplayCheckbox.id = "autoplay-checkbox";
-autoplayCheckbox.checked = true; // Activado por defecto
+autoplayCheckbox.checked = true;
 
 const autoplayLabel = document.createElement("label");
 autoplayLabel.htmlFor = "autoplay-checkbox";
 autoplayLabel.textContent = "Autoplay";
-autoplayLabel.style.color = "#fff";
+autoplayLabel.style.color = "var(--text-primary)";
+autoplayLabel.style.fontSize = "0.9rem";
+autoplayLabel.style.fontWeight = "300";
+autoplayLabel.style.textTransform = "uppercase";
+autoplayLabel.style.letterSpacing = "1px";
 
 autoplayContainer.appendChild(autoplayCheckbox);
 autoplayContainer.appendChild(autoplayLabel);
 
 // Agregar al panel de controles
-document.querySelector(".controls-panel").appendChild(autoplayContainer);
+const controlsPanel = document.querySelector(".controls-panel");
+if (controlsPanel) {
+    controlsPanel.appendChild(autoplayContainer);
+}
 
 // Función para actualizar la cantidad de nieve dependiendo de la canción
 function updateSnowfall() {
-    // Limpiar la nieve existente antes de agregar una nueva
-    snowFall.snow(document.body, "clear"); // Limpiar nieve
-    const flakesCount = currentSongIndex * 10 + 50; // Aumenta la cantidad de nieve según el índice de la canción
-    snowFall.snow(document.body, {  
-        flakeCount: flakesCount,  
-        flakeColor: "#ffffff",  
-        minSize: 2,  
-        maxSize: 5,  
-        minSpeed: 1,  
-        maxSpeed: 3  
-    });
+    if (typeof snowFall !== 'undefined') {
+        snowFall.snow(document.body, "clear");
+        const flakesCount = currentSongIndex * 10 + 50;
+        snowFall.snow(document.body, {  
+            flakeCount: flakesCount,  
+            flakeColor: "#ffffff",  
+            minSize: 2,  
+            maxSize: 5,  
+            minSpeed: 1,  
+            maxSpeed: 3  
+        });
+    }
 }
 
-// Al cargar la página o cuando se inicia la canción, actualiza el efecto de nieve
+// Al cargar la página
 window.onload = function() {
-    snowFall.snow(document.body, {  
-        flakeCount: 50,  
-        flakeColor: "#ffffff",  
-        minSize: 2,  
-        maxSize: 5,  
-        minSpeed: 1,  
-        maxSpeed: 3  
-    });
+    if (typeof snowFall !== 'undefined') {
+        snowFall.snow(document.body, {  
+            flakeCount: 50,  
+            flakeColor: "#ffffff",  
+            minSize: 2,  
+            maxSize: 5,  
+            minSpeed: 1,  
+            maxSpeed: 3  
+        });
+    }
 };
 
 document.addEventListener("DOMContentLoaded", function () {
     const panel = document.querySelector(".panel-inicial");
     const botonCerrar = document.querySelector(".cerrar-panel-inicial");
 
-    botonCerrar.addEventListener("click", function () {
-        panel.style.display = "none";
-    });
+    if (botonCerrar) {
+        botonCerrar.addEventListener("click", function () {
+            panel.style.display = "none";
+        });
+    }
 });
 
 // Configuración del control de volumen
-volumeSlider.addEventListener("input", function () {
-    const percentage = (this.value - this.min) / (this.max - this.min) * 100;
-    this.style.background = `linear-gradient(to right, var(--song-color, #4caf50) ${percentage}%, rgba(0, 0, 0, 0.5) ${percentage}%)`;
-    audioPlayer.volume = volumeSlider.value;
-});
+if (volumeSlider) {
+    volumeSlider.addEventListener("input", function () {
+        const percentage = (this.value - this.min) / (this.max - this.min) * 100;
+        this.style.background = `linear-gradient(to right, var(--accent-gold) ${percentage}%, rgba(212, 175, 55, 0.2) ${percentage}%)`;
+        audioPlayer.volume = volumeSlider.value;
+    });
+}
 
 function initializeAudioContext() {
     if (!audioContext) {
@@ -399,6 +413,8 @@ function setupAudioAnalysis() {
     updateBackgroundOpacity();
 }
 
+let currentScale = 1;
+
 function updateBackgroundOpacity() {
     requestAnimationFrame(updateBackgroundOpacity);
     if (!analyser) return;
@@ -406,271 +422,404 @@ function updateBackgroundOpacity() {
     analyser.getByteFrequencyData(dataArray);
     const average = dataArray.reduce((sum, value) => sum + value, 0) / bufferLength;
 
-    // Ajustar la opacidad
-    const opacity = Math.max(0.1, Math.min(1.0, average / 128));
-    backgroundPanel.style.opacity = opacity.toFixed(1);
+    const targetScale = 1 + (average / 512);
+    currentScale = currentScale + (targetScale - currentScale) * 0.45;
 
-    // Ajustar la escala de la imagen de fondo
-    const scale = 1 + (average / 256); // Escala entre 1 y 1.5 (puedes ajustar estos valores)
-    backgroundPanel.style.transform = `scale(${scale})`;
+    const dynamicBg = document.querySelector(".dynamic-background");
+    if (dynamicBg) {
+        dynamicBg.style.transform = `scale(${currentScale})`;
+    }
+
+    if (backgroundPanel) {
+        backgroundPanel.style.opacity = Math.max(0.1, Math.min(1.0, average / 128)).toFixed(1);
+    }
+}
+
+function createActionButtons(song) {
+    // Eliminar botones anteriores
+    const oldBtnContainer = document.querySelector('.button-container');
+    if (oldBtnContainer) oldBtnContainer.remove();
+
+    // Crear botón de descarga
+    const downloadBtn = document.createElement('button');
+    downloadBtn.innerHTML = '⬇️ Descargar';
+    downloadBtn.className = 'download-btn';
+    downloadBtn.style.cssText = `
+        background: linear-gradient(145deg, ${song.color || 'var(--accent-gold)'}, ${song.color ? song.color + '99' : '#b8860b'});
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        color: var(--primary-black);
+        padding: 12px 24px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        border-radius: 2px;
+        margin: 0 8px;
+        white-space: nowrap;
+    `;
+
+    // Crear botón de donación
+    const paypalBtn = document.createElement('button');
+    paypalBtn.innerHTML = '💳 Donar';
+    paypalBtn.className = 'paypal-btn';
+    paypalBtn.style.cssText = `
+        background: linear-gradient(145deg, var(--secondary-black), var(--primary-black));
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        color: var(--text-primary);
+        padding: 12px 24px;
+        font-size: 0.9rem;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        border-radius: 2px;
+        margin: 0 8px;
+        white-space: nowrap;
+    `;
+
+    // Efectos hover para ambos botones
+    [downloadBtn, paypalBtn].forEach(btn => {
+        btn.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px)';
+            this.style.boxShadow = '0 8px 25px rgba(212, 175, 55, 0.3)';
+        });
+        
+        btn.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = 'none';
+        });
+    });
+
+    // Funcionalidad del botón de descarga
+    downloadBtn.addEventListener('click', () => {
+        try {
+            const link = document.createElement('a');
+            link.href = song.audio;
+            link.download = `${song.title.replace(/[/\\?%*:|"<>]/g, '')} - ${song.author.replace(/[/\\?%*:|"<>]/g, '')}.mp3`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Feedback visual
+            downloadBtn.innerHTML = '✅ Descargando...';
+            setTimeout(() => {
+                downloadBtn.innerHTML = '⬇️ Descargar';
+            }, 2000);
+        } catch (error) {
+            console.error('Error al descargar:', error);
+            downloadBtn.innerHTML = '❌ Error';
+            setTimeout(() => {
+                downloadBtn.innerHTML = 'Descargar';
+            }, 2000);
+        }
+    });
+
+    // Funcionalidad del botón de donación
+    paypalBtn.addEventListener('click', () => {
+        window.open('https://paypal.me/FacundoAmelotti', '_blank');
+        
+        // Feedback visual
+        paypalBtn.innerHTML = '✨ ¡Gracias!';
+        setTimeout(() => {
+            paypalBtn.innerHTML = '💳 Donar';
+        }, 2000);
+    });
+
+    // Crear contenedor para los botones
+    const buttonContainer = document.createElement('div');
+    buttonContainer.className = 'button-container';
+    buttonContainer.style.cssText = `
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0;
+        margin: 24px 0;
+        padding: 20px 0;
+        border-top: 1px solid rgba(212, 175, 55, 0.2);
+        flex-wrap: wrap;
+    `;
+
+    buttonContainer.appendChild(downloadBtn);
+    buttonContainer.appendChild(paypalBtn);
+
+    return buttonContainer;
 }
 
 function loadSong(index) {
+    if (!songs || !songs[index]) return;
+    
     const song = songs[index];
     audioPlayer.src = song.audio;
-    songImage.src = song.image;
-    songTitle.textContent = song.title;
-    songAuthor.textContent = song.author;
-    songDescription.textContent = song.description;
-    document.body.style.backgroundColor = song.color;
-    listBtn.style.backgroundColor = song.color;    
-
-    autoplayCheckbox.style.accentColor = song.color;
+    
+    if (songImage) songImage.src = song.image;
+    if (songTitle) songTitle.textContent = song.title;
+    if (songAuthor) songAuthor.textContent = song.author;
+    if (songDescription) songDescription.textContent = song.description;
+    
+    // Aplicar colores del tema
+    document.documentElement.style.setProperty('--current-song-color', song.color || 'var(--accent-gold)');
+    
+    if (listBtn) {
+        listBtn.style.backgroundColor = song.color || 'var(--accent-gold)';
+    }
+    
+    if (autoplayCheckbox) {
+        autoplayCheckbox.style.accentColor = song.color || 'var(--accent-gold)';
+    }
+    
+    // Manejar la nota de la canción
+    if (songNote) {
+        songNote.innerHTML = '';
         
-    songNote.textContent = song.note;
+        if (song.nota) {
+            const noteValue = parseInt(song.nota, 10);
+            const noteLabel = document.createElement('span');
+            noteLabel.textContent = 'Nota personal: ';
+            noteLabel.style.cssText = `
+                color: var(--text-secondary);
+                font-size: 0.9rem;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            `;
+            songNote.appendChild(noteLabel);
 
-    // Agregar estrellas
-    const noteValue = parseInt(song.nota, 10); // Convertir nota a número
-    songNote.innerHTML = `Nota personal: `;
+            for (let i = 0; i < noteValue; i++) {
+                const starImg = document.createElement("img");
+                starImg.src = "./src/img/star.png";
+                starImg.alt = "⭐";
+                starImg.style.cssText = `
+                    width: 18px;
+                    height: 18px;
+                    margin-right: 3px;
+                    filter: brightness(1.2) contrast(1.1);
+                `;
+                songNote.appendChild(starImg);
+            }
 
-    for (let i = 0; i < noteValue; i++) {
-        const starImg = document.createElement("img");
-        starImg.src = "./src/img/star.png"; // Reemplaza con la ruta correcta de tu estrella
-        starImg.alt = "⭐";
-        starImg.style.width = "20px"; 
-        starImg.style.height = "20px"; 
-        starImg.style.marginRight = "3px";
-        songNote.appendChild(starImg);
+            const ratingText = document.createTextNode(` / 10`);
+            songNote.appendChild(ratingText);
+        }
     }
 
-    // Agregar " / 10" después de las estrellas
-    const textNode = document.createTextNode(` / 10`);
-    songNote.appendChild(textNode);
-
-     // === Agregar botón de descarga ===
-    // Eliminar botón anterior si existe
-    const oldBtn = document.querySelector('.download-btn');
-    if(oldBtn) oldBtn.remove();
-
-        // Crear nuevo botón
-        const downloadBtn = document.createElement('button');
-        downloadBtn.textContent = 'Descargar canción';
-        downloadBtn.className = 'download-btn';
-        downloadBtn.style.backgroundColor = song.color;
-        downloadBtn.style.color = 'white';
-        downloadBtn.style.border = 'none';
-        downloadBtn.style.padding = '5px 20px';
-        downloadBtn.style.borderRadius = '5px';
-        downloadBtn.style.cursor = 'pointer';
-        downloadBtn.style.display = 'block';
-
-           // === Agregar botón de PayPal ===
-    const oldPaypalBtn = document.querySelector('.paypal-btn');
-    if(oldPaypalBtn) oldPaypalBtn.remove();
-
-    const PaypalBtn = document.createElement('button');
-    PaypalBtn.textContent = 'Donar 💳🎁💖';
-    PaypalBtn.className = 'paypal-btn';
-    PaypalBtn.style.backgroundColor = song.color;
-    PaypalBtn.style.color = 'white';
-    PaypalBtn.style.border = 'none';
-    PaypalBtn.style.padding = '5px 20px';
-    PaypalBtn.style.borderRadius = '5px';
-    PaypalBtn.style.cursor = 'pointer';
-    PaypalBtn.style.display = 'block';
-    PaypalBtn.style.right = '0';
+    // Crear y agregar los botones de acción
+    const buttonContainer = createActionButtons(song);
     
-            // Funcionalidad de descarga
-    downloadBtn.addEventListener('click', () => {
-        const link = document.createElement('a');
-        link.href = song.audio;
-        link.download = `${song.title.replace(/[/\\?%*:|"<>]/g, '')} - ${song.author.replace(/[/\\?%*:|"<>]/g, '')}.mp3`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    });
-
-    PaypalBtn.addEventListener('click', () => {
-        window.open('https://paypal.me/FacundoAmelotti', '_blank');
-    });
+    // Encontrar el lugar correcto para insertar los botones
+    let insertLocation = songNote;
+    if (!insertLocation) insertLocation = songDescription;
+    if (!insertLocation) insertLocation = songAuthor;
+    if (!insertLocation) insertLocation = songTitle;
     
-
-    backgroundPanel.style.backgroundImage = `url(${song.image})`;
-    backgroundPanel.style.backgroundSize = "cover";
-    backgroundPanel.style.backgroundPosition = "center";
-    backgroundPanel.style.backgroundRepeat = "no-repeat";
-    backgroundPanel.style.width = "100vw";
-    backgroundPanel.style.height= "100vh";
-    backgroundPanel.style.filter = "blur(12px)";
-
-    document.querySelectorAll(".controls-panel button").forEach(button => {
-        button.style.backgroundColor = song.color;
-    });
-
-    volumeSlider.style.setProperty("--song-color", song.color);
-    volumeSlider.dispatchEvent(new Event("input"));
-
-    // === Eliminar contenedor de botones anterior ===
-    const oldButtonContainer = document.querySelector('.button-container');
-    if (oldButtonContainer) oldButtonContainer.remove();
-
-    // === Crear nuevo contenedor para botones ===
-    const buttonContainer = document.createElement('div');
-    buttonContainer.className = 'button-container'; // Agrega una clase identificadora
-    buttonContainer.style.display = 'flex';
-    buttonContainer.style.gap = '10px';
-    buttonContainer.style.justifyContent = 'center';
-    buttonContainer.style.marginTop = '10px';
-
-    // Agregar botones al contenedor
-    buttonContainer.appendChild(downloadBtn);
-    buttonContainer.appendChild(PaypalBtn);
-
-    // Insertar contenedor después de las estrellas
-    songNote.parentNode.insertBefore(buttonContainer, songNote.nextSibling);
-    }
-
-audioPlayer.addEventListener("ended", () => {
-    if (autoplayCheckbox.checked) {
-        currentSongIndex = (currentSongIndex + 1) % songs.length;
-        loadSong(currentSongIndex);
-        audioPlayer.play();
-        playPauseBtn.textContent = "||";
-    }
-});
-
-// Cargar la primera canción al iniciar
-loadSong(currentSongIndex);
-
-playPauseBtn.addEventListener("click", async () => {
-    initializeAudioContext();
-    if (audioPlayer.paused) {
-        try {
-            await audioPlayer.play();
-            playPauseBtn.textContent = "||";
-            setupAudioAnalysis();
-        } catch (error) {
-            console.error("Error al reproducir el audio:", error);
+    if (insertLocation && insertLocation.parentNode) {
+        // Insertar después del elemento de referencia
+        if (insertLocation.nextSibling) {
+            insertLocation.parentNode.insertBefore(buttonContainer, insertLocation.nextSibling);
+        } else {
+            insertLocation.parentNode.appendChild(buttonContainer);
         }
     } else {
+        // Fallback: agregar al final del body
+        document.body.appendChild(buttonContainer);
+    }
+
+    // Actualizar fondo dinámico
+    const dynamicBg = document.querySelector(".dynamic-background");
+    if (dynamicBg && song.image) {
+        dynamicBg.style.backgroundImage = `url(${song.image})`;
+        dynamicBg.style.backgroundSize = "cover";
+        dynamicBg.style.backgroundPosition = "center center";
+        dynamicBg.style.backgroundRepeat = "no-repeat";
+        dynamicBg.style.backgroundAttachment = "fixed";
+        dynamicBg.style.backgroundColor = "black";
+    }
+
+    // Actualizar título del panel de tracks
+    updateTrackTitle();
+}
+
+function updateTrackTitle() {
+    const trackTitle = document.querySelector('.panel-tracks p');
+    if (trackTitle && songs) {
+        trackTitle.textContent = `Track ${currentSongIndex + 1}/${songs.length}`;
+    }
+}
+
+// Event listeners
+if (audioPlayer) {
+    audioPlayer.addEventListener("ended", () => {
+        if (autoplayCheckbox && autoplayCheckbox.checked) {
+            currentSongIndex = (currentSongIndex + 1) % songs.length;
+            loadSong(currentSongIndex);
+            audioPlayer.play();
+            if (playPauseBtn) playPauseBtn.textContent = "||";
+            updateSnowfall();
+        }
+    });
+}
+
+// Cargar la primera canción al iniciar
+if (typeof songs !== 'undefined' && songs.length > 0) {
+    loadSong(currentSongIndex);
+}
+
+if (playPauseBtn) {
+    playPauseBtn.addEventListener("click", async () => {
+        initializeAudioContext();
+        if (audioPlayer.paused) {
+            try {
+                await audioPlayer.play();
+                playPauseBtn.textContent = "||";
+                setupAudioAnalysis();
+            } catch (error) {
+                console.error("Error al reproducir el audio:", error);
+            }
+        } else {
+            audioPlayer.pause();
+            playPauseBtn.textContent = "▶";
+        }
+    });
+}
+
+if (nextBtn) {
+    nextBtn.addEventListener("click", () => {
+        currentSongIndex = (currentSongIndex + 1) % songs.length;
+        loadSong(currentSongIndex);
+        audioPlayer.currentTime = 0;
         audioPlayer.pause();
-        playPauseBtn.textContent = "▶";
-    }
-});
+        if (playPauseBtn) playPauseBtn.textContent = "▶";
+        updateSnowfall();
+    });
+}
 
-nextBtn.addEventListener("click", () => {
-    currentSongIndex = (currentSongIndex + 1) % songs.length;
-    loadSong(currentSongIndex);
-    audioPlayer.currentTime = 0;
-    audioPlayer.pause();
-    playPauseBtn.textContent = "▶";
-    updateSnowfall(); // Actualiza la cantidad de nieve al cambiar la canción
-});
+if (prevBtn) {
+    prevBtn.addEventListener("click", () => {
+        currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+        loadSong(currentSongIndex);
+        audioPlayer.currentTime = 0;
+        audioPlayer.pause();
+        if (playPauseBtn) playPauseBtn.textContent = "▶";
+        updateSnowfall();
+    });
+}
 
-prevBtn.addEventListener("click", () => {
-    currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
-    loadSong(currentSongIndex);
-    audioPlayer.currentTime = 0;
-    audioPlayer.pause();
-    playPauseBtn.textContent = "▶";
-    updateSnowfall(); // Actualiza la cantidad de nieve al cambiar la canción
-});
+if (rewindBtn) {
+    rewindBtn.addEventListener("click", () => {
+        audioPlayer.currentTime -= 5;
+    });
+}
 
-rewindBtn.addEventListener("click", () => {
-    audioPlayer.currentTime -= 5;
-});
+if (forwardBtn) {
+    forwardBtn.addEventListener("click", () => {
+        audioPlayer.currentTime += 5;
+    });
+}
 
-forwardBtn.addEventListener("click", () => {
-    audioPlayer.currentTime += 5;
-});
-
-listBtn.addEventListener("click", (event) => {
-    if (event.target === listBtn) { // Verifica si se hace click fuera del contenido
-        if(panelTracks.style.display == "block"){
-            panelTracks.style.display = "none";
-        }
-        else{
-            panelTracks.style.display = "block";
-        }
-    }
-});
-
-// Crear panel-tracks
+// Crear panel de tracks con estilo profesional
 const panelTracks = document.createElement("div");
 panelTracks.classList.add("panel-tracks");
+panelTracks.style.display = "none";
 
-// Agregar título con el número total de canciones
+// Título del panel
 const trackTitle = document.createElement("p");
-trackTitle.textContent = `Canción: ${currentSongIndex + 1}/${songs.length}`;
+trackTitle.textContent = `Track 1/${songs ? songs.length : 0}`;
 panelTracks.appendChild(trackTitle);
 
-// Crear lista de canciones
+// Lista de canciones
 const trackList = document.createElement("ul");
 
-songs.forEach((song, index) => {
-    const trackItem = document.createElement("li");
-    const trackLink = document.createElement("a");
-    trackLink.href = "#"; // Evita que recargue la página
-    trackLink.textContent = `${index + 1}. ${song.title} (${song.description})`;
-   // trackLink.style.color = song.color;
+if (typeof songs !== 'undefined') {
+    songs.forEach((song, index) => {
+        const trackItem = document.createElement("li");
+        const trackLink = document.createElement("a");
+        trackLink.href = "#";
+        trackLink.textContent = `${index + 1}. ${song.title} - ${song.author}`;
 
-    trackLink.addEventListener("click", (event) => {
-        event.preventDefault(); // Evita la navegación predeterminada
-        currentSongIndex = index; // Actualiza el índice actual
-        loadSong(currentSongIndex); // Carga la canción seleccionada
-        audioPlayer.currentTime = 0; // Reinicia el tiempo
-        audioPlayer.play(); // Inicia la reproducción
-        playPauseBtn.textContent = "||"; // Cambia el botón de pausa
-        trackTitle.textContent = `Track: ${currentSongIndex + 1}/${songs.length}`; // Actualiza el título
-        setupAudioAnalysis();
+        trackLink.addEventListener("click", (event) => {
+            event.preventDefault();
+            currentSongIndex = index;
+            loadSong(currentSongIndex);
+            audioPlayer.currentTime = 0;
+            audioPlayer.play();
+            if (playPauseBtn) playPauseBtn.textContent = "||";
+            setupAudioAnalysis();
+            updateSnowfall();
+            
+            // Cerrar panel en móvil
+            if (window.innerWidth <= 1200) {
+                panelTracks.style.display = "none";
+            }
+        });
+
+        trackItem.appendChild(trackLink);
+        trackList.appendChild(trackItem);
     });
+}
 
-    trackItem.appendChild(trackLink);
-    trackList.appendChild(trackItem);
-});
+panelTracks.appendChild(trackList);
 
-// Crear un contenedor para las canciones con scroll
-const trackListContainer = document.createElement("div");
-trackListContainer.classList.add("track-list-container");
-trackListContainer.appendChild(trackList);
-panelTracks.appendChild(trackListContainer);
-
-// Establecer estilos CSS
-const style = document.createElement("style");
-style.textContent = `
-    .track-list-container {
-        max-height: 500px;  /* Establecer el alto máximo */
-        overflow-y: auto;  /* Habilitar el desplazamiento vertical */        
-    }
-    .track-list-container ul {
-        list-style-type: none;
-        padding: 0;
-    }
-    .track-list-container li {
-        padding: 5px;
-    }
-
-        /* Scroll personalizado */
-    .track-list-container::-webkit-scrollbar {
-        width: 8px;
-    }
-    .track-list-container::-webkit-scrollbar-thumb {
-        background-color:rgb(223, 223, 223);  /* Color del pulgar del scroll */
-        border-radius: 10px;  /* Bordes redondeados del pulgar */
-        transition: background-color 0.3s ease;
-    }
-    .track-list-container::-webkit-scrollbar-thumb:hover {
-        background-color:rgb(255, 255, 255);  /* Color del pulgar al pasar el mouse */
-    }
-    .track-list-container::-webkit-scrollbar-track {
-        background-color: rgba(255, 255, 255, 0.1);  /* Color del fondo del scroll */
-        border-radius: 10px;
-    }
-`;
-
-
-document.head.appendChild(style);
+// Event listener para el botón de lista
+if (listBtn) {
+    listBtn.addEventListener("click", (event) => {
+        event.preventDefault();
+        if (panelTracks.style.display === "block") {
+            panelTracks.style.display = "none";
+        } else {
+            panelTracks.style.display = "block";
+        }
+    });
+}
 
 // Agregar el panel al documento
-document.body.appendChild(panelTracks); // Cámbialo si necesitas agregarlo en otro lugar
+document.body.appendChild(panelTracks);
 
+// Crear botón para cerrar el panel de tracks (solo en responsive)
+const closeTrackPanelBtn = document.createElement("button");
+closeTrackPanelBtn.textContent = "✕ Cerrar";
+closeTrackPanelBtn.className = "close-track-panel-btn";
+closeTrackPanelBtn.style.cssText = `
+    display: none;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: transparent;
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    z-index: 1002;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+`;
+
+closeTrackPanelBtn.addEventListener("click", () => {
+    panelTracks.style.display = "none";
+});
+
+// Mostrar el botón solo si el panel está visible y en móvil
+const handleResponsiveCloseBtn = () => {
+    if (window.innerWidth <= 1200 && panelTracks.style.display === "block") {
+        closeTrackPanelBtn.style.display = "block";
+    } else {
+        closeTrackPanelBtn.style.display = "none";
+    }
+};
+
+window.addEventListener("resize", handleResponsiveCloseBtn);
+new MutationObserver(handleResponsiveCloseBtn).observe(panelTracks, {
+    attributes: true,
+    attributeFilter: ["style"],
+});
+
+// Agregar el botón al panel
+panelTracks.appendChild(closeTrackPanelBtn);
+
+// Responsive behavior
+window.addEventListener('resize', () => {
+    if (window.innerWidth <= 1200 && panelTracks.style.display === "block") {
+        panelTracks.style.display = "none";
+    }
+});
